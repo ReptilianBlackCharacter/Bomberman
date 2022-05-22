@@ -1,0 +1,53 @@
+# plansza
+
+#wymiary planszy, można zmieniać je tutaj
+#OBA WYMIARY MUSZĄ BYĆ NIEPARZYSTE!!!!!
+wymiar_x=39
+wymiar_y=77
+
+plansza=[]
+rzad = []
+
+
+#kod poniżej ma tworzyć bazową planszę
+#w kodzie poniżej są tylko niezniszczalne bloczki
+#kod poniżej
+
+#górna krawędź
+for i in range(0,wymiar_y):
+    rzad.append("X")
+plansza.append(rzad)
+rzad=[]
+
+#środek planszy
+polowa_y_minus_1=(wymiar_y-1)/2
+for i in range(2,wymiar_x):
+    if i%2==0:
+        for j in range(0,int(polowa_y_minus_1)):
+            rzad.append("X")
+            rzad.append(" ")
+    else:
+        rzad.append("X")
+        for k in range(2,wymiar_y):
+            rzad.append(" ")
+    rzad.append("X")
+    plansza.append(rzad)
+    rzad=[]
+
+#dolna krawędź
+for i in range(0,wymiar_y):
+    rzad.append("X")
+plansza.append(rzad)
+rzad=[]
+
+
+#kod poniżej: drukuje planszę
+#tutaj jako zwykłą listę
+print(plansza)
+print()
+print()
+#tutaj w formie właściwej planszy
+for wiersz in plansza:
+    for kolumna in wiersz:
+        print(kolumna,end="")
+    print()
