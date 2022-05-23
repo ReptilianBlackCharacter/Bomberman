@@ -1,9 +1,13 @@
 # plansza
 
+import random
+
 #wymiary planszy, można zmieniać je tutaj
 #OBA WYMIARY MUSZĄ BYĆ NIEPARZYSTE!!!!!
 wymiar_x=39
 wymiar_y=77
+
+liczba_zniszczalnych_bloczkow = 100
 
 plansza=[]
 rzad = []
@@ -41,11 +45,30 @@ plansza.append(rzad)
 rzad=[]
 
 
+def wstaw_zniszczalne_bloczki(liczbabloczkow):
+    zmiennaPomocna = 0
+    while zmiennaPomocna < liczbabloczkow:
+        wylosowana1 = random.randint(1, wymiar_x - 1)
+        wylosowana2 = random.randint(1, wymiar_y - 1)
+        if wylosowana1 == 1 and wylosowana2 == 1:
+            plansza[wylosowana1][wylosowana2] == ' '
+        elif wylosowana1 == 1 and wylosowana2 == 2:
+            plansza[wylosowana1][wylosowana2] == ' '
+        elif wylosowana1 == 2 and wylosowana2 == 1:
+            plansza[wylosowana1][wylosowana2] == ' '
+        elif plansza[wylosowana1][wylosowana2] == ' ':
+            plansza[wylosowana1][wylosowana2] = 'H'
+            zmiennaPomocna += 1
+
+#wstawianie do planszy zniszczalnych bloczkow - wywolanie funkcji 
+wstaw_zniszczalne_bloczki(liczba_zniszczalnych_bloczkow)
+
+
 #kod poniżej: drukuje planszę
 #tutaj jako zwykłą listę
-print(plansza)
-print()
-print()
+#print(plansza)
+#print()
+#print()
 #tutaj w formie właściwej planszy
 for wiersz in plansza:
     for kolumna in wiersz:
