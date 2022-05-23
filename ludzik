@@ -1,0 +1,56 @@
+class Gracz:
+	def __init__(self):
+		self.wynik = 0
+		self.pozycjax = 1
+		self.pozycjay = 1
+		self.zycia = 3
+
+		self.prawo = "d"
+		self.lewo = "a"
+		self.gora = "w"
+		self.dol = "s"
+
+	def pobierz_wynik(self):
+		return self.wynik
+
+	def pobierz_pozycjax(self):
+		return self.pozycjax
+
+	def pobierz_pozycjay(self):
+		return self.pozycjay
+
+	def pobierz_zycia(self):
+		return self.zycia
+
+	def spawn_ludzik(self):
+		plansza[self.pozycjax][self.pozycjay] = "P"
+
+#strać życie przy kontakcie z przeciwnikiem
+	def zmien_wynik(self, liczba):
+		self.wynik += liczba
+
+def ruch(self, klawisz):
+        # ruch w lewo
+	    if klawisz == "a":
+	        if plansza[self.pozycjax][self.pozycjay - 1] == ' ':
+	            plansza[self.pozycjax][self.pozycjay] = ' '
+	            plansza[self.pozycjax][self.pozycjay - 1] = 'P'
+	            self.pozycjay -= 1
+	    # ruch w prawo
+	    elif klawisz == "d":
+	        if plansza[self.pozycjax][self.pozycjay + 1] == ' ':
+	            plansza[self.pozycjax][self.pozycjay] = ' '
+	            plansza[self.pozycjax][self.pozycjay + 1] = 'P'
+	            self.pozycjay += 1
+	    # ruch w dol
+	    elif klawisz == "s":
+	        if plansza[self.pozycjax + 1][self.pozycjay] == ' ':
+	            plansza[self.pozycjax][self.pozycjay] = ' '
+	            plansza[self.pozycjax + 1][self.pozycjay] = 'P'
+	            self.pozycjax += 1
+	    # ruch w gore
+	    elif klawisz == "w":
+	        if plansza[self.pozycjax - 1][self.pozycjay] == ' ':
+	            plansza[self.pozycjax][self.pozycjay] = ' '
+	            plansza[self.pozycjax - 1][self.pozycjay] = 'P'
+	            self.pozycjax -= 1
