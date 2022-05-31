@@ -1,0 +1,19 @@
+#to dodać na sam początek całości kodu
+import os
+
+#poniższe osobno, na końcu całości kodu
+
+#linijki tuż poniżej generują i spawnują ludzika, 
+#tutaj dodamy też generowanie i spawnowanie przeciwników 
+ludzik=Gracz()
+ludzik.spawn_ludzik()
+
+#poniższe to już właściwa rozgrywka
+while True:
+    klawisz=input()
+    ludzik.ruch(klawisz)
+    os.system("cls")
+    for wiersz in plansza:
+        for kolumna in wiersz:
+            print(kolumna,end="")
+        print()
