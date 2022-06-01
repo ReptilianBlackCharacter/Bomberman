@@ -70,6 +70,8 @@ wstaw_zniszczalne_bloczki(liczba_zniszczalnych_bloczkow)
 #print()
 #print()
 #tutaj w formie właściwej planszy
+
+#W TYM MIEJSCU WSTAWIĆ LUDZIK=GRACZ() I LUDZIK.SPAWN_LUDZIK
 for wiersz in plansza:
     for kolumna in wiersz:
         print(kolumna,end="")
