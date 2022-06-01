@@ -1,19 +1,38 @@
 #to dodać na sam początek całości kodu
+#musicie też mieć najpierw zainstalowany moduł keyboard (aby to zrobić:
+#otwórzcie pole komend (windows+cmd) i wpiszcie "pip install keyboard")
 import os
+import keyboard
+import time
 
-#poniższe osobno, na końcu całości kodu
-
-#linijki tuż poniżej generują i spawnują ludzika, 
-#tutaj dodamy też generowanie i spawnowanie przeciwników 
-ludzik=Gracz()
-ludzik.spawn_ludzik()
-
-#poniższe to już właściwa rozgrywka
-while True:
-    klawisz=input()
-    ludzik.ruch(klawisz)
+def odnowienie_planszy():
     os.system("cls")
     for wiersz in plansza:
         for kolumna in wiersz:
             print(kolumna,end="")
         print()
+
+def dzialanie(klawisz):
+    ludzik.ruch(klawisz)
+    odnowienie_planszy()
+    time.sleep(1/20)
+
+
+#linijki tuż poniżej generują i spawnują ludzika,
+#tutaj dodamy też generowanie i spawnowanie przeciwników
+#WSTAWIĆ TO PRZED PIERWSZYM WYGENEROWANIEM PLANSZY
+ludzik=Gracz()
+ludzik.spawn_ludzik()
+
+
+#poniższe osobno, na końcu całości kodu
+
+keyboard.add_hotkey("a",lambda: dzialanie("a"))
+keyboard.add_hotkey("d",lambda: dzialanie("d"))
+keyboard.add_hotkey("w",lambda: dzialanie("w"))
+keyboard.add_hotkey("s",lambda: dzialanie("s"))
+
+#poniższy kod służy tylko temu, żeby program coś robił gdy nie naciskamy
+#klawisza, żeby po prostu sobie działał. JEST NIEZBĘDNY DO DZIAŁANIA
+while True:
+    time.sleep(10)
