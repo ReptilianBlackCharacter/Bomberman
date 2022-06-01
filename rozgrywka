@@ -34,5 +34,6 @@ keyboard.add_hotkey("s",lambda: dzialanie("s"))
 
 #poniższy kod służy tylko temu, żeby program coś robił gdy nie naciskamy
 #klawisza, żeby po prostu sobie działał. JEST NIEZBĘDNY DO DZIAŁANIA
+#(później doda się tu np. kod żeby przeciwnicy sobie sami działali)
 while True:
     time.sleep(10)
