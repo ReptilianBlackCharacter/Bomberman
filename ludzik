@@ -29,7 +29,7 @@ class Gracz:
 	def zmien_wynik(self, liczba):
 		self.wynik += liczba
 
-def ruch(self, klawisz):
+	def ruch(self, klawisz):
         # ruch w lewo
 	    if klawisz == "a":
 	        if plansza[self.pozycjax][self.pozycjay - 1] == ' ':
