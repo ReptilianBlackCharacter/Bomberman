@@ -11,6 +11,8 @@ def odnowienie_planszy():
         for kolumna in wiersz:
             print(kolumna,end="")
         print()
+    print("Ilosc zyc: " , ludzik.pobierz_zycia())
+        
 
 def dzialanie(klawisz):
     ludzik.ruch(klawisz)
@@ -24,16 +26,24 @@ def dzialanie(klawisz):
 ludzik=Gracz()
 ludzik.spawn_ludzik()
 
-
 #poniższe osobno, na końcu całości kodu
 
 keyboard.add_hotkey("a",lambda: dzialanie("a"))
 keyboard.add_hotkey("d",lambda: dzialanie("d"))
 keyboard.add_hotkey("w",lambda: dzialanie("w"))
 keyboard.add_hotkey("s",lambda: dzialanie("s"))
+keyboard.add_hotkey("left arrow",lambda: bomba.spawn_bomba(ludzik.pobierz_pozycjax(),ludzik.pobierz_pozycjay()))
+keyboard.add_hotkey("right arrow",lambda: bomba.spawn_bomba(ludzik.pobierz_pozycjax(),ludzik.pobierz_pozycjay()))
+keyboard.add_hotkey("down arrow",lambda: bomba.spawn_bomba(ludzik.pobierz_pozycjax(),ludzik.pobierz_pozycjay()))
+keyboard.add_hotkey("up arrow",lambda: bomba.spawn_bomba(ludzik.pobierz_pozycjax(),ludzik.pobierz_pozycjay()))
 
 #poniższy kod służy tylko temu, żeby program coś robił gdy nie naciskamy
 #klawisza, żeby po prostu sobie działał. JEST NIEZBĘDNY DO DZIAŁANIA
 #(później doda się tu np. kod żeby przeciwnicy sobie sami działali)
 while True:
-    time.sleep(10)
+    ludzik.spawn_ludzik()
+    przeciwnik.ruch_przeciwnik(plansza)
+    przeciwnik2.ruch_przeciwnik(plansza)
+    przeciwnik3.ruch_przeciwnik(plansza)
+    bomba.eksplozja()
+    time.sleep(2)
