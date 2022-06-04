@@ -18,12 +18,17 @@ class Bomba():
             plansza[self.pozycjax_bomby][self.pozycjay_bomby] = "E"
             if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X":
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = "E"
+                ludzik.tracenie_zycia()
             if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] != "X":
                 plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = "E"
+                ludzik.tracenie_zycia()
             if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "X":
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = "E"
+                ludzik.tracenie_zycia()
             if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] != "X":
                 plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = "E"
+                ludzik.tracenie_zycia()
+            odnowienie_planszy()
             time.sleep(1)
             plansza[self.pozycjax_bomby][self.pozycjay_bomby] = " "
             if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == "E":
@@ -36,11 +41,25 @@ class Bomba():
                 plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = " "
         elif self.poziom_bomby == 2:
             print("do zrobienia")
+        odnowienie_planszy()
         self.pozycjax_bomby = 0
         self.pozycjay_bomby = 0
 
     def spawn_bomba(self,pozycjaxludzika, pozycjayludzika):
-        self.pozycjax_bomby = pozycjaxludzika
-        self.pozycjay_bomby = pozycjayludzika
+        if keyboard.is_pressed("left arrow"):
+            self.pozycjax_bomby = pozycjaxludzika
+            self.pozycjay_bomby = pozycjayludzika - 1
+        elif keyboard.is_pressed("right arrow"):
+            self.pozycjax_bomby = pozycjaxludzika
+            self.pozycjay_bomby = pozycjayludzika + 1
+        elif keyboard.is_pressed("down arrow"):
+            self.pozycjax_bomby = pozycjaxludzika + 1
+            self.pozycjay_bomby = pozycjayludzika
+        elif keyboard.is_pressed("up arrow"):
+            self.pozycjax_bomby = pozycjaxludzika - 1
+            self.pozycjay_bomby = pozycjayludzika
         plansza[self.pozycjax_bomby][self.pozycjay_bomby] = "o"
-        self.odliczanie()      
+        odnowienie_planszy()
+        #self.odliczanie()
+
+bomba=Bomba()
