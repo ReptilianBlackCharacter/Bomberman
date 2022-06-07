@@ -1,3 +1,5 @@
+import termcolor
+
 class Bomba():
     def __init__(self):
         self.pozycjax_bomby = 0
@@ -15,29 +17,29 @@ class Bomba():
 
     def eksplozja(self):
         if self.poziom_bomby == 1:
-            plansza[self.pozycjax_bomby][self.pozycjay_bomby] = "E"
+            plansza[self.pozycjax_bomby][self.pozycjay_bomby] = termcolor.colored("E","red")
             if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X":
-                plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = "E"
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = termcolor.colored("E","red")
                 ludzik.tracenie_zycia()
             if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] != "X":
-                plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = "E"
+                plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = termcolor.colored("E","red")
                 ludzik.tracenie_zycia()
             if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "X":
-                plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = "E"
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = termcolor.colored("E","red")
                 ludzik.tracenie_zycia()
             if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] != "X":
-                plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = "E"
+                plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = termcolor.colored("E","red")
                 ludzik.tracenie_zycia()
             odnowienie_planszy()
             time.sleep(1)
             plansza[self.pozycjax_bomby][self.pozycjay_bomby] = " "
-            if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == "E":
+            if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = " "
-            if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] == "E":
+            if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = " "
-            if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == "E":
+            if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = " "
-            if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == "E":
+            if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = " "
         elif self.poziom_bomby == 2:
             print("do zrobienia")
@@ -58,7 +60,7 @@ class Bomba():
         elif keyboard.is_pressed("up arrow"):
             self.pozycjax_bomby = pozycjaxludzika - 1
             self.pozycjay_bomby = pozycjayludzika
-        plansza[self.pozycjax_bomby][self.pozycjay_bomby] = "o"
+        plansza[self.pozycjax_bomby][self.pozycjay_bomby] = termcolor.colored("o","red")
         odnowienie_planszy()
         #self.odliczanie()
 
