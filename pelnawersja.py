@@ -5,7 +5,7 @@ import os
 import keyboard
 import time
 import random
-
+import termcolor
 
 def odnowienie_planszy():
     os.system("cls")
@@ -271,7 +271,7 @@ class Bomba():
             if self.poziom_bomby == 1:
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby] == "B":
                     ludzik.tracenie_zycia()
-                plansza[self.pozycjax_bomby][self.pozycjay_bomby] = "E"
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby] = termcolor.colored("E","red")
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]=="P":
                     ludzik.tracenie_zycia()
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]=="Q":
@@ -310,7 +310,7 @@ class Bomba():
                     if(self.pozycjax_bomby==drzwi[0] and (self.pozycjay_bomby - 1)==drzwi[1]):
                         plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == "D"
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X" and plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "D" :
-                    plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = "E"
+                    plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = termcolor.colored("E","red")
                 if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]=="P":
                     ludzik.tracenie_zycia()
                 if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]=="Q":
@@ -349,7 +349,7 @@ class Bomba():
                     if((self.pozycjax_bomby-1)==drzwi[0] and (self.pozycjay_bomby)==drzwi[1]):
                         plansza[self.pozycjax_bomby-1][self.pozycjay_bomby] == "D"
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X" and plansza[self.pozycjax_bomby-1][self.pozycjay_bomby] != "D" :
-                    plansza[self.pozycjax_bomby][self.pozycjay_bomby-1] = "E"
+                    plansza[self.pozycjax_bomby][self.pozycjay_bomby-1] = termcolor.colored("E","red")
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]=="P":
                     ludzik.tracenie_zycia()
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]=="Q":
@@ -388,7 +388,7 @@ class Bomba():
                     if(self.pozycjax_bomby==drzwi[0] and (self.pozycjay_bomby + 1)==drzwi[1]):
                         plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == "D"
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "X" and plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "D" :
-                    plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = "E"
+                    plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = termcolor.colored("E","red")
                 if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]=="P":
                     ludzik.tracenie_zycia()
                 if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]=="Q":
@@ -427,18 +427,18 @@ class Bomba():
                     if((self.pozycjax_bomby+1)==drzwi[0] and (self.pozycjay_bomby)==drzwi[1]):
                         plansza[self.pozycjax_bomby+1][self.pozycjay_bomby] == "D"
                 if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby] != "X" and plansza[self.pozycjax_bomby+1][self.pozycjay_bomby] != "D" :
-                    plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = "E"
+                    plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = termcolor.colored("E","red")
                 self.stan_istnienia_bomby+=1
         #zakończenie cyklu
         elif self.stan_istnienia_bomby==czas_wybuchu_bomby+1:
             plansza[self.pozycjax_bomby][self.pozycjay_bomby] = " "
-            if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == "E":
+            if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = " "
-            if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] == "E":
+            if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = " "
-            if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == "E":
+            if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = " "
-            if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == "E":
+            if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = " "
             self.pozycjax_bomby = 0
             self.pozycjay_bomby = 0
