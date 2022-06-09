@@ -145,8 +145,7 @@ class Gracz:
             # bomba.poziom_bomby=czas_wybuchu_bomby+1
         else:
             self.game_over()
-
-
+            
     def game_over(self):
         os.system("cls")
         print('  ________                         ______')
@@ -164,6 +163,8 @@ class Gracz:
         print(' |        |    \\    /    |       |    \\')
         print(' |        |     \\  /     |       |     \\')
         print(' |________|      \\/      |______ |      \\')
+        print('')
+        print("Twój ostateczny wynik to:", ludzik.pobierz_wynik())
         time.sleep(10)
 
 class Przeciwnik:
