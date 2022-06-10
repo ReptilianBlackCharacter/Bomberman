@@ -35,7 +35,7 @@ def wstaw_zniszczalne_bloczki(liczbabloczkow):
         elif wylosowana1 == 2 and wylosowana2 == 1:
             plansza[wylosowana1][wylosowana2] == ' '
         elif plansza[wylosowana1][wylosowana2] == ' ':
-            plansza[wylosowana1][wylosowana2] = 'H'
+            plansza[wylosowana1][wylosowana2] = termcolor.colored("H","yellow")
             zmiennaPomocna += 1
 
 def wstaw_drzwi(wymiar_x,wymiar_y):
@@ -43,7 +43,7 @@ def wstaw_drzwi(wymiar_x,wymiar_y):
     while czy:
         x_d= random.randint(1,wymiar_x-1)   ##pozycja drzwi
         y_d= random.randint(1,wymiar_y-1)
-        if plansza[x_d][y_d] == 'H':
+        if plansza[x_d][y_d] == termcolor.colored("H","yellow"):
             czy=False
         return {x_d,y_d}
 
@@ -73,7 +73,7 @@ class Gracz:
         return self.zycia
 
     def spawn_ludzik(self):
-        plansza[self.pozycjax][self.pozycjay] = "P"
+        plansza[self.pozycjax][self.pozycjay] = termcolor.colored("P","green")
 
 
     #strać życie przy kontakcie z przeciwnikiem
@@ -84,55 +84,55 @@ class Gracz:
         self.wynik += liczba
 
     def ruch(self, klawisz):
-        if plansza[self.pozycjax][self.pozycjay]=="B":
+        if plansza[self.pozycjax][self.pozycjay]==termcolor.colored("B","red"):
             # ruch w lewo
             if klawisz == "a":
                 if plansza[self.pozycjax][self.pozycjay - 1] == ' ':
-                    plansza[self.pozycjax][self.pozycjay] = 'o'
-                    plansza[self.pozycjax][self.pozycjay - 1] = 'P'
+                    plansza[self.pozycjax][self.pozycjay] = termcolor.colored("o","red")
+                    plansza[self.pozycjax][self.pozycjay - 1] = termcolor.colored("P","green")
                     self.pozycjay -= 1
             # ruch w prawo
             elif klawisz == "d":
                 if plansza[self.pozycjax][self.pozycjay + 1] == ' ':
-                    plansza[self.pozycjax][self.pozycjay] = 'o'
-                    plansza[self.pozycjax][self.pozycjay + 1] = 'P'
+                    plansza[self.pozycjax][self.pozycjay] = termcolor.colored("o","red")
+                    plansza[self.pozycjax][self.pozycjay + 1] = termcolor.colored("P","green")
                     self.pozycjay += 1
             # ruch w dol
             elif klawisz == "s":
                 if plansza[self.pozycjax + 1][self.pozycjay] == ' ':
-                    plansza[self.pozycjax][self.pozycjay] = 'o'
-                    plansza[self.pozycjax + 1][self.pozycjay] = 'P'
+                    plansza[self.pozycjax][self.pozycjay] = termcolor.colored("o","red")
+                    plansza[self.pozycjax + 1][self.pozycjay] = termcolor.colored("P","green")
                     self.pozycjax += 1
             # ruch w gore
             elif klawisz == "w":
                 if plansza[self.pozycjax - 1][self.pozycjay] == ' ':
-                    plansza[self.pozycjax][self.pozycjay] = 'o'
-                    plansza[self.pozycjax - 1][self.pozycjay] = 'P'
+                    plansza[self.pozycjax][self.pozycjay] = termcolor.colored("o","red")
+                    plansza[self.pozycjax - 1][self.pozycjay] = termcolor.colored("P","green")
                     self.pozycjax -= 1
         else:
             # ruch w lewo
             if klawisz == "a":
                 if plansza[self.pozycjax][self.pozycjay - 1] == ' ':
                     plansza[self.pozycjax][self.pozycjay] = ' '
-                    plansza[self.pozycjax][self.pozycjay - 1] = 'P'
+                    plansza[self.pozycjax][self.pozycjay - 1] = termcolor.colored("P","green")
                     self.pozycjay -= 1
             # ruch w prawo
             elif klawisz == "d":
                 if plansza[self.pozycjax][self.pozycjay + 1] == ' ':
                     plansza[self.pozycjax][self.pozycjay] = ' '
-                    plansza[self.pozycjax][self.pozycjay + 1] = 'P'
+                    plansza[self.pozycjax][self.pozycjay + 1] = termcolor.colored("P","green")
                     self.pozycjay += 1
             # ruch w dol
             elif klawisz == "s":
                 if plansza[self.pozycjax + 1][self.pozycjay] == ' ':
                     plansza[self.pozycjax][self.pozycjay] = ' '
-                    plansza[self.pozycjax + 1][self.pozycjay] = 'P'
+                    plansza[self.pozycjax + 1][self.pozycjay] = termcolor.colored("P","green")
                     self.pozycjax += 1
             # ruch w gore
             elif klawisz == "w":
                 if plansza[self.pozycjax - 1][self.pozycjay] == ' ':
                     plansza[self.pozycjax][self.pozycjay] = ' '
-                    plansza[self.pozycjax - 1][self.pozycjay] = 'P'
+                    plansza[self.pozycjax - 1][self.pozycjay] = termcolor.colored("P","green")
                     self.pozycjax -= 1
 
     def tracenie_zycia(self):
@@ -145,7 +145,7 @@ class Gracz:
             # bomba.poziom_bomby=czas_wybuchu_bomby+1
         else:
             self.game_over()
-            
+
     def game_over(self):
         os.system("cls")
         print('  ________                         ______')
@@ -182,7 +182,7 @@ class Przeciwnik:
             self.pozycjay_przeciwnik = random.randint(4,wymiar_y-1)
             self.pozycjax_przeciwnik = random.randint(4,wymiar_x-1)
             if plansza[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik] == " ":
-                plansza[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik] = "Q"
+                plansza[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik] = termcolor.colored("Q","magenta")
                 x += 1
             else:
                 x = 0
@@ -197,9 +197,9 @@ class Przeciwnik:
             if self.kierunek == 0:
                 if tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik - 1] == " ":
                     tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik] = " "
-                    tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik - 1] = "Q"
+                    tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik - 1] = termcolor.colored("Q","magenta")
                     self.pozycjay_przeciwnik -= 1
-                elif tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik - 1] == "P":
+                elif tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik - 1] == termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
                 else:
                     self.kierunek = random.randint(1, 3)
@@ -207,9 +207,9 @@ class Przeciwnik:
             if self.kierunek == 1:
                 if tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik + 1] == " ":
                     tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik] = " "
-                    tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik + 1] = "Q"
+                    tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik + 1] = termcolor.colored("Q","magenta")
                     self.pozycjay_przeciwnik += 1
-                elif tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik + 1] == "P":
+                elif tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik + 1] == termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
                 else:
                     self.kierunek = int(random.choice("023"))
@@ -217,9 +217,9 @@ class Przeciwnik:
             if self.kierunek == 2:
                 if tablica[self.pozycjax_przeciwnik - 1][self.pozycjay_przeciwnik] == " ":
                     tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik] = " "
-                    tablica[self.pozycjax_przeciwnik - 1][self.pozycjay_przeciwnik] = "Q"
+                    tablica[self.pozycjax_przeciwnik - 1][self.pozycjay_przeciwnik] = termcolor.colored("Q","magenta")
                     self.pozycjax_przeciwnik -= 1
-                elif tablica[self.pozycjax_przeciwnik-1][self.pozycjay_przeciwnik] == "P":
+                elif tablica[self.pozycjax_przeciwnik-1][self.pozycjay_przeciwnik] == termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
                 else:
                     self.kierunek = int(random.choice("013"))
@@ -227,9 +227,9 @@ class Przeciwnik:
             if self.kierunek == 3:
                 if tablica[self.pozycjax_przeciwnik + 1][self.pozycjay_przeciwnik] == " ":
                     tablica[self.pozycjax_przeciwnik][self.pozycjay_przeciwnik] = " "
-                    tablica[self.pozycjax_przeciwnik + 1][self.pozycjay_przeciwnik] = "Q"
+                    tablica[self.pozycjax_przeciwnik + 1][self.pozycjay_przeciwnik] = termcolor.colored("Q","magenta")
                     self.pozycjax_przeciwnik += 1
-                elif tablica[self.pozycjax_przeciwnik+1][self.pozycjay_przeciwnik] == "P":
+                elif tablica[self.pozycjax_przeciwnik+1][self.pozycjay_przeciwnik] == termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
                 else:
                     self.kierunek = random.randint(0, 2)
@@ -255,26 +255,26 @@ class Bomba():
             self.pozycjay_bomby=0
         #postawienie bomby
         elif self.stan_istnienia_bomby==1:
-            plansza[ludzik.pozycjax][ludzik.pozycjay] = "B"
+            plansza[ludzik.pozycjax][ludzik.pozycjay] = termcolor.colored("B","red")
             self.pozycjax_bomby=ludzik.pozycjax
             self.pozycjay_bomby=ludzik.pozycjay
             self.stan_istnienia_bomby+=1
         #odliczanie
         elif self.stan_istnienia_bomby<=czas_odliczanie_bomby:
             if plansza[ludzik.pozycjax][ludzik.pozycjay]==plansza[self.pozycjax_bomby][self.pozycjay_bomby]:
-                plansza[self.pozycjax_bomby][self.pozycjay_bomby]="B"
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby]=termcolor.colored("B","red")
             else:
-                plansza[self.pozycjax_bomby][self.pozycjay_bomby]="o"
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby]=termcolor.colored("o","red")
             self.stan_istnienia_bomby+=1
         #wybuch
         elif self.stan_istnienia_bomby<=czas_wybuchu_bomby:
             if self.poziom_bomby == 1:
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby] == "B":
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby] == termcolor.colored("B","red"):
                     ludzik.tracenie_zycia()
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby] = termcolor.colored("E","red")
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]=="P":
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]==termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]=="Q":
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]==termcolor.colored("Q","magenta"):
                     if liczba_przeciwnikow>0:
                         if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
                             przeciwnik.smierc_przeciwnik()
@@ -305,15 +305,15 @@ class Bomba():
                                                         elif liczba_przeciwnikow>9:
                                                             if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
                                                                 przeciwnik10.smierc_przeciwnik()
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == "H":
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == termcolor.colored("H","yellow"):
                     ludzik.wynik+=50
                     if(self.pozycjax_bomby==drzwi[0] and (self.pozycjay_bomby - 1)==drzwi[1]):
                         plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == "D"
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X" and plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "D" :
                     plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = termcolor.colored("E","red")
-                if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]=="P":
+                if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]==termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
-                if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]=="Q":
+                if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]==termcolor.colored("Q","magenta"):
                     if liczba_przeciwnikow>0:
                         if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
                             przeciwnik.smierc_przeciwnik()
@@ -344,15 +344,15 @@ class Bomba():
                                                         elif liczba_przeciwnikow>9:
                                                             if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
                                                                 przeciwnik10.smierc_przeciwnik()
-                if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] == "H":
+                if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] == termcolor.colored("H","yellow"):
                     ludzik.wynik+=50
                     if((self.pozycjax_bomby-1)==drzwi[0] and (self.pozycjay_bomby)==drzwi[1]):
                         plansza[self.pozycjax_bomby-1][self.pozycjay_bomby] == "D"
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X" and plansza[self.pozycjax_bomby-1][self.pozycjay_bomby] != "D" :
-                    plansza[self.pozycjax_bomby][self.pozycjay_bomby-1] = termcolor.colored("E","red")
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]=="P":
+                if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] != "X" and plansza[self.pozycjax_bomby-1][self.pozycjay_bomby] != "D" :
+                    plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = termcolor.colored("E","red")
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]==termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]=="Q":
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]==termcolor.colored("Q","magenta"):
                     if liczba_przeciwnikow>0:
                         if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
                             przeciwnik.smierc_przeciwnik()
@@ -383,15 +383,15 @@ class Bomba():
                                                         elif liczba_przeciwnikow>9:
                                                             if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
                                                                 przeciwnik10.smierc_przeciwnik()
-                if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == "H":
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == termcolor.colored("H","yellow"):
                     ludzik.wynik+=50
                     if(self.pozycjax_bomby==drzwi[0] and (self.pozycjay_bomby + 1)==drzwi[1]):
                         plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == "D"
                 if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "X" and plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "D" :
                     plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = termcolor.colored("E","red")
-                if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]=="P":
+                if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]==termcolor.colored("P","green"):
                     ludzik.tracenie_zycia()
-                if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]=="Q":
+                if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]==termcolor.colored("Q","magenta"):
                     if liczba_przeciwnikow>0:
                         if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
                             przeciwnik.smierc_przeciwnik()
@@ -422,7 +422,7 @@ class Bomba():
                                                         elif liczba_przeciwnikow>9:
                                                             if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
                                                                 przeciwnik10.smierc_przeciwnik()
-                if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == "H":
+                if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == termcolor.colored("H","yellow"):
                     ludzik.wynik+=50
                     if((self.pozycjax_bomby+1)==drzwi[0] and (self.pozycjay_bomby)==drzwi[1]):
                         plansza[self.pozycjax_bomby+1][self.pozycjay_bomby] == "D"
@@ -502,7 +502,7 @@ wstaw_zniszczalne_bloczki(liczba_zniszczalnych_bloczkow)
 drzwi=[drzwi_x,drzwi_y]
 
 ######debug
-#plansza[2][2]='H'
+#plansza[2][2]=termcolor.colored("H","yellow")
 #drzwi=[2,2]
 ####
 ludzik=Gracz()
