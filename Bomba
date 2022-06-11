@@ -1,37 +1,202 @@
 import termcolor
 
+czas_odliczanie_bomby=3
+czas_wybuchu_bomby=6
+
+
 class Bomba():
     def __init__(self):
         self.pozycjax_bomby = 0
         self.pozycjay_bomby = 0
         self.czas_do_eksplozji = 3
         self.poziom_bomby = 1
+        self.stan_istnienia_bomby=0
 
-    def odliczanie(self):
-        if self.pozycjax_bomby != 0:
-            if self.pozycjay_bomby != 0:
-                for i in range(self.czas_do_eksplozji):
-                    self.czas_do_eksplozji -=1
-                    time.sleep(1)
-                self.eksplozja()
-
-    def eksplozja(self):
-        if self.poziom_bomby == 1:
-            plansza[self.pozycjax_bomby][self.pozycjay_bomby] = termcolor.colored("E","red")
-            if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X":
-                plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = termcolor.colored("E","red")
-                ludzik.tracenie_zycia()
-            if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] != "X":
-                plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = termcolor.colored("E","red")
-                ludzik.tracenie_zycia()
-            if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "X":
-                plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = termcolor.colored("E","red")
-                ludzik.tracenie_zycia()
-            if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] != "X":
-                plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = termcolor.colored("E","red")
-                ludzik.tracenie_zycia()
-            odnowienie_planszy()
-            time.sleep(1)
+#stan istnienia bomby poniżej to nasz sposób na odliczanie jak długo będą trwały
+#różne jej czynności, w ten sposób będziemy to modyfikować
+    def istnienie_bomby(self,drzwi):
+        #spoczynek
+        if self.stan_istnienia_bomby==0:
+            self.pozycjax_bomby=0
+            self.pozycjay_bomby=0
+        #postawienie bomby
+        elif self.stan_istnienia_bomby==1:
+            plansza[ludzik.pozycjax][ludzik.pozycjay] = termcolor.colored("B","red")
+            self.pozycjax_bomby=ludzik.pozycjax
+            self.pozycjay_bomby=ludzik.pozycjay
+            self.stan_istnienia_bomby+=1
+        #odliczanie
+        elif self.stan_istnienia_bomby<=czas_odliczanie_bomby:
+            if plansza[ludzik.pozycjax][ludzik.pozycjay]==plansza[self.pozycjax_bomby][self.pozycjay_bomby]:
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby]=termcolor.colored("B","red")
+            else:
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby]=termcolor.colored("o","red")
+            self.stan_istnienia_bomby+=1
+        #wybuch
+        elif self.stan_istnienia_bomby<=czas_wybuchu_bomby:
+            if self.poziom_bomby == 1:
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby] == termcolor.colored("B","red"):
+                    ludzik.tracenie_zycia()
+                plansza[self.pozycjax_bomby][self.pozycjay_bomby] = termcolor.colored("E","red")
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]==termcolor.colored("P","green"):
+                    ludzik.tracenie_zycia()
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]==termcolor.colored("Q","magenta"):
+                    if liczba_przeciwnikow>0:
+                        if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                            przeciwnik.smierc_przeciwnik()
+                        elif liczba_przeciwnikow>1:
+                            if plansza[przeciwnik2.pozycjax_przeciwnik][przeciwnik2.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                przeciwnik2.smierc_przeciwnik()
+                            elif liczba_przeciwnikow>2:
+                                if plansza[przeciwnik3.pozycjax_przeciwnik][przeciwnik3.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                    przeciwnik3.smierc_przeciwnik()
+                                elif liczba_przeciwnikow>3:
+                                    if plansza[przeciwnik4.pozycjax_przeciwnik][przeciwnik4.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                        przeciwnik4.smierc_przeciwnik()
+                                    elif liczba_przeciwnikow>4:
+                                        if plansza[przeciwnik5.pozycjax_przeciwnik][przeciwnik5.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                            przeciwnik5.smierc_przeciwnik()
+                                        elif liczba_przeciwnikow>5:
+                                            if plansza[przeciwnik6.pozycjax_przeciwnik][przeciwnik6.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                                przeciwnik6.smierc_przeciwnik()
+                                            elif liczba_przeciwnikow>6:
+                                                if plansza[przeciwnik7.pozycjax_przeciwnik][przeciwnik7.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                                    przeciwnik7.smierc_przeciwnik()
+                                                elif liczba_przeciwnikow>7:
+                                                    if plansza[przeciwnik8.pozycjax_przeciwnik][przeciwnik8.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                                        przeciwnik8.smierc_przeciwnik()
+                                                    elif liczba_przeciwnikow>8:
+                                                        if plansza[przeciwnik9.pozycjax_przeciwnik][przeciwnik9.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                                            przeciwnik9.smierc_przeciwnik()
+                                                        elif liczba_przeciwnikow>9:
+                                                            if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby-1]:
+                                                                przeciwnik10.smierc_przeciwnik()
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == termcolor.colored("H","yellow"):
+                    ludzik.wynik+=50
+                    if(self.pozycjax_bomby==drzwi[0] and (self.pozycjay_bomby - 1)==drzwi[1]):
+                        plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == "D"
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "X" and plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] != "D" :
+                    plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = termcolor.colored("E","red")
+                if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]==termcolor.colored("P","green"):
+                    ludzik.tracenie_zycia()
+                if plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]==termcolor.colored("Q","magenta"):
+                    if liczba_przeciwnikow>0:
+                        if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                            przeciwnik.smierc_przeciwnik()
+                        elif liczba_przeciwnikow>1:
+                            if plansza[przeciwnik2.pozycjax_przeciwnik][przeciwnik2.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                przeciwnik2.smierc_przeciwnik()
+                            elif liczba_przeciwnikow>2:
+                                if plansza[przeciwnik3.pozycjax_przeciwnik][przeciwnik3.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                    przeciwnik3.smierc_przeciwnik()
+                                elif liczba_przeciwnikow>3:
+                                    if plansza[przeciwnik4.pozycjax_przeciwnik][przeciwnik4.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                        przeciwnik4.smierc_przeciwnik()
+                                    elif liczba_przeciwnikow>4:
+                                        if plansza[przeciwnik5.pozycjax_przeciwnik][przeciwnik5.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                            przeciwnik5.smierc_przeciwnik()
+                                        elif liczba_przeciwnikow>5:
+                                            if plansza[przeciwnik6.pozycjax_przeciwnik][przeciwnik6.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                                przeciwnik6.smierc_przeciwnik()
+                                            elif liczba_przeciwnikow>6:
+                                                if plansza[przeciwnik7.pozycjax_przeciwnik][przeciwnik7.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                                    przeciwnik7.smierc_przeciwnik()
+                                                elif liczba_przeciwnikow>7:
+                                                    if plansza[przeciwnik8.pozycjax_przeciwnik][przeciwnik8.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                                        przeciwnik8.smierc_przeciwnik()
+                                                    elif liczba_przeciwnikow>8:
+                                                        if plansza[przeciwnik9.pozycjax_przeciwnik][przeciwnik9.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                                            przeciwnik9.smierc_przeciwnik()
+                                                        elif liczba_przeciwnikow>9:
+                                                            if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby-1][self.pozycjay_bomby]:
+                                                                przeciwnik10.smierc_przeciwnik()
+                if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] == termcolor.colored("H","yellow"):
+                    ludzik.wynik+=50
+                    if((self.pozycjax_bomby-1)==drzwi[0] and (self.pozycjay_bomby)==drzwi[1]):
+                        plansza[self.pozycjax_bomby-1][self.pozycjay_bomby] == "D"
+                if plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] != "X" and plansza[self.pozycjax_bomby-1][self.pozycjay_bomby] != "D" :
+                    plansza[self.pozycjax_bomby - 1][self.pozycjay_bomby] = termcolor.colored("E","red")
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]==termcolor.colored("P","green"):
+                    ludzik.tracenie_zycia()
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]==termcolor.colored("Q","magenta"):
+                    if liczba_przeciwnikow>0:
+                        if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                            przeciwnik.smierc_przeciwnik()
+                        elif liczba_przeciwnikow>1:
+                            if plansza[przeciwnik2.pozycjax_przeciwnik][przeciwnik2.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                przeciwnik2.smierc_przeciwnik()
+                            elif liczba_przeciwnikow>2:
+                                if plansza[przeciwnik3.pozycjax_przeciwnik][przeciwnik3.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                    przeciwnik3.smierc_przeciwnik()
+                                elif liczba_przeciwnikow>3:
+                                    if plansza[przeciwnik4.pozycjax_przeciwnik][przeciwnik4.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                        przeciwnik4.smierc_przeciwnik()
+                                    elif liczba_przeciwnikow>4:
+                                        if plansza[przeciwnik5.pozycjax_przeciwnik][przeciwnik5.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                            przeciwnik5.smierc_przeciwnik()
+                                        elif liczba_przeciwnikow>5:
+                                            if plansza[przeciwnik6.pozycjax_przeciwnik][przeciwnik6.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                                przeciwnik6.smierc_przeciwnik()
+                                            elif liczba_przeciwnikow>6:
+                                                if plansza[przeciwnik7.pozycjax_przeciwnik][przeciwnik7.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                                    przeciwnik7.smierc_przeciwnik()
+                                                elif liczba_przeciwnikow>7:
+                                                    if plansza[przeciwnik8.pozycjax_przeciwnik][przeciwnik8.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                                        przeciwnik8.smierc_przeciwnik()
+                                                    elif liczba_przeciwnikow>8:
+                                                        if plansza[przeciwnik9.pozycjax_przeciwnik][przeciwnik9.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                                            przeciwnik9.smierc_przeciwnik()
+                                                        elif liczba_przeciwnikow>9:
+                                                            if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby][self.pozycjay_bomby+1]:
+                                                                przeciwnik10.smierc_przeciwnik()
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == termcolor.colored("H","yellow"):
+                    ludzik.wynik+=50
+                    if(self.pozycjax_bomby==drzwi[0] and (self.pozycjay_bomby + 1)==drzwi[1]):
+                        plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] == "D"
+                if plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "X" and plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] != "D" :
+                    plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = termcolor.colored("E","red")
+                if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]==termcolor.colored("P","green"):
+                    ludzik.tracenie_zycia()
+                if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]==termcolor.colored("Q","magenta"):
+                    if liczba_przeciwnikow>0:
+                        if plansza[przeciwnik.pozycjax_przeciwnik][przeciwnik.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                            przeciwnik.smierc_przeciwnik()
+                        elif liczba_przeciwnikow>1:
+                            if plansza[przeciwnik2.pozycjax_przeciwnik][przeciwnik2.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                przeciwnik2.smierc_przeciwnik()
+                            elif liczba_przeciwnikow>2:
+                                if plansza[przeciwnik3.pozycjax_przeciwnik][przeciwnik3.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                    przeciwnik3.smierc_przeciwnik()
+                                elif liczba_przeciwnikow>3:
+                                    if plansza[przeciwnik4.pozycjax_przeciwnik][przeciwnik4.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                        przeciwnik4.smierc_przeciwnik()
+                                    elif liczba_przeciwnikow>4:
+                                        if plansza[przeciwnik5.pozycjax_przeciwnik][przeciwnik5.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                            przeciwnik5.smierc_przeciwnik()
+                                        elif liczba_przeciwnikow>5:
+                                            if plansza[przeciwnik6.pozycjax_przeciwnik][przeciwnik6.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                                przeciwnik6.smierc_przeciwnik()
+                                            elif liczba_przeciwnikow>6:
+                                                if plansza[przeciwnik7.pozycjax_przeciwnik][przeciwnik7.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                                    przeciwnik7.smierc_przeciwnik()
+                                                elif liczba_przeciwnikow>7:
+                                                    if plansza[przeciwnik8.pozycjax_przeciwnik][przeciwnik8.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                                        przeciwnik8.smierc_przeciwnik()
+                                                    elif liczba_przeciwnikow>8:
+                                                        if plansza[przeciwnik9.pozycjax_przeciwnik][przeciwnik9.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                                            przeciwnik9.smierc_przeciwnik()
+                                                        elif liczba_przeciwnikow>9:
+                                                            if plansza[przeciwnik10.pozycjax_przeciwnik][przeciwnik10.pozycjay_przeciwnik]==plansza[self.pozycjax_bomby+1][self.pozycjay_bomby]:
+                                                                przeciwnik10.smierc_przeciwnik()
+                if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == termcolor.colored("H","yellow"):
+                    ludzik.wynik+=50
+                    if((self.pozycjax_bomby+1)==drzwi[0] and (self.pozycjay_bomby)==drzwi[1]):
+                        plansza[self.pozycjax_bomby+1][self.pozycjay_bomby] == "D"
+                if plansza[self.pozycjax_bomby+1][self.pozycjay_bomby] != "X" and plansza[self.pozycjax_bomby+1][self.pozycjay_bomby] != "D" :
+                    plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = termcolor.colored("E","red")
+                self.stan_istnienia_bomby+=1
+        #zakończenie cyklu
+        elif self.stan_istnienia_bomby==czas_wybuchu_bomby+1:
             plansza[self.pozycjax_bomby][self.pozycjay_bomby] = " "
             if plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby - 1] = " "
@@ -41,27 +206,11 @@ class Bomba():
                 plansza[self.pozycjax_bomby][self.pozycjay_bomby + 1] = " "
             if plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] == termcolor.colored("E","red"):
                 plansza[self.pozycjax_bomby + 1][self.pozycjay_bomby] = " "
-        elif self.poziom_bomby == 2:
-            print("do zrobienia")
-        odnowienie_planszy()
-        self.pozycjax_bomby = 0
-        self.pozycjay_bomby = 0
+            self.pozycjax_bomby = 0
+            self.pozycjay_bomby = 0
+            self.stan_istnienia_bomby = 0
+
 
     def spawn_bomba(self,pozycjaxludzika, pozycjayludzika):
-        if keyboard.is_pressed("left arrow"):
-            self.pozycjax_bomby = pozycjaxludzika
-            self.pozycjay_bomby = pozycjayludzika - 1
-        elif keyboard.is_pressed("right arrow"):
-            self.pozycjax_bomby = pozycjaxludzika
-            self.pozycjay_bomby = pozycjayludzika + 1
-        elif keyboard.is_pressed("down arrow"):
-            self.pozycjax_bomby = pozycjaxludzika + 1
-            self.pozycjay_bomby = pozycjayludzika
-        elif keyboard.is_pressed("up arrow"):
-            self.pozycjax_bomby = pozycjaxludzika - 1
-            self.pozycjay_bomby = pozycjayludzika
-        plansza[self.pozycjax_bomby][self.pozycjay_bomby] = termcolor.colored("o","red")
-        odnowienie_planszy()
-        #self.odliczanie()
-
-bomba=Bomba()
+        if self.stan_istnienia_bomby==0:
+            self.stan_istnienia_bomby=1
