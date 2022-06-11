@@ -37,13 +37,79 @@ keyboard.add_hotkey("right arrow",lambda: bomba.spawn_bomba(ludzik.pobierz_pozyc
 keyboard.add_hotkey("down arrow",lambda: bomba.spawn_bomba(ludzik.pobierz_pozycjax(),ludzik.pobierz_pozycjay()))
 keyboard.add_hotkey("up arrow",lambda: bomba.spawn_bomba(ludzik.pobierz_pozycjax(),ludzik.pobierz_pozycjay()))
 
-#poniższy kod służy tylko temu, żeby program coś robił gdy nie naciskamy
-#klawisza, żeby po prostu sobie działał. JEST NIEZBĘDNY DO DZIAŁANIA
-#(później doda się tu np. kod żeby przeciwnicy sobie sami działali)
-while True:
-    ludzik.spawn_ludzik()
-    przeciwnik.ruch_przeciwnik(plansza)
-    przeciwnik2.ruch_przeciwnik(plansza)
-    przeciwnik3.ruch_przeciwnik(plansza)
-    bomba.eksplozja()
-    time.sleep(2)
+
+######debug
+#plansza[2][2]=termcolor.colored("H","yellow")
+#drzwi=[2,2]
+####
+ludzik=Gracz()
+ludzik.spawn_ludzik()
+
+
+if liczba_przeciwnikow>0:
+    przeciwnik = Przeciwnik()
+    przeciwnik.spawn_przeciwnik(plansza)
+    if liczba_przeciwnikow>1:
+        przeciwnik2 = Przeciwnik()
+        przeciwnik2.spawn_przeciwnik(plansza)
+        if liczba_przeciwnikow>2:
+            przeciwnik3 = Przeciwnik()
+            przeciwnik3.spawn_przeciwnik(plansza)
+            if liczba_przeciwnikow>3:
+                przeciwnik4 = Przeciwnik()
+                przeciwnik4.spawn_przeciwnik(plansza)
+                if liczba_przeciwnikow>4:
+                    przeciwnik5 = Przeciwnik()
+                    przeciwnik5.spawn_przeciwnik(plansza)
+                    if liczba_przeciwnikow>5:
+                        przeciwnik6 = Przeciwnik()
+                        przeciwnik6.spawn_przeciwnik(plansza)
+                        if liczba_przeciwnikow>6:
+                            przeciwnik7 = Przeciwnik()
+                            przeciwnik7.spawn_przeciwnik(plansza)
+                            if liczba_przeciwnikow>7:
+                                przeciwnik8 = Przeciwnik()
+                                przeciwnik8.spawn_przeciwnik(plansza)
+                                if liczba_przeciwnikow>8:
+                                    przeciwnik9 = Przeciwnik()
+                                    przeciwnik9.spawn_przeciwnik(plansza)
+                                    if liczba_przeciwnikow>9:
+                                        przeciwnik10 = Przeciwnik()
+                                        przeciwnik10.spawn_przeciwnik(plansza)
+
+bomba=Bomba()
+
+for wiersz in plansza:
+    for kolumna in wiersz:
+        print(kolumna,end="")
+    print()
+
+
+while ludzik.pobierz_zycia()>0:
+
+    if liczba_przeciwnikow>0:
+        przeciwnik.ruch_przeciwnik(plansza)
+        if liczba_przeciwnikow>1:
+            przeciwnik2.ruch_przeciwnik(plansza)
+            if liczba_przeciwnikow>2:
+                przeciwnik3.ruch_przeciwnik(plansza)
+                if liczba_przeciwnikow>3:
+                    przeciwnik4.ruch_przeciwnik(plansza)
+                    if liczba_przeciwnikow>4:
+                        przeciwnik5.ruch_przeciwnik(plansza)
+                        if liczba_przeciwnikow>5:
+                            przeciwnik6.ruch_przeciwnik(plansza)
+                            if liczba_przeciwnikow>6:
+                                przeciwnik7.ruch_przeciwnik(plansza)
+                                if liczba_przeciwnikow>7:
+                                    przeciwnik8.ruch_przeciwnik(plansza)
+                                    if liczba_przeciwnikow>8:
+                                        przeciwnik9.ruch_przeciwnik(plansza)
+                                        if liczba_przeciwnikow>9:
+                                            przeciwnik10.ruch_przeciwnik(plansza)
+
+    bomba.istnienie_bomby(drzwi)
+
+    odnowienie_planszy()
+    time.sleep(2/3)
+ludzik.game_over()
